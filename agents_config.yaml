@@ -1,0 +1,42 @@
+agents:
+  lead:
+    name: "大总管"
+    role: "orchestrator"
+    model: "qwen-max"
+    max_depth: 3
+    can_delegate: true
+    allowed_agents: ["voc", "geo", "tiktok", "price_monitor"]
+    
+  voc:
+    name: "VOC市场分析师"
+    role: "analyst"
+    model: "qwen-turbo"
+    tools: ["review_crawler", "sentiment_analysis", "competitor_analysis"]
+    
+  geo:
+    name: "GEO内容优化师"
+    role: "content_creator"
+    model: "qwen-max"
+    tools: ["seo_keyword", "content_generation", "geo_optimization"]
+    
+  tiktok:
+    name: "TikTok爆款编导"
+    role: "video_producer"
+    model: "qwen-turbo"
+    tools: ["trend_analysis", "script_generation", "video_mockup"]
+    
+  price_monitor:
+    name: "价格监控专家"
+    role: "monitor"
+    model: "qwen-turbo"
+    tools: ["price_tracker", "anomaly_detection", "alert_sender"]
+
+communication:
+  message_bus:
+    type: "redis_pubsub"
+    channel_prefix: "agent:"
+    
+  webhook:
+    feishu:
+      enabled: true
+      webhook_url: "${FEISHU_WEBHOOK}"
